@@ -34,3 +34,17 @@ def hertz_model2(data_obj, opt_kwargs={}):
     fitted = _hertz.fit(f, params, x=d)
 
     return fitted, (d, f, fitted.best_fit)
+
+
+def line(data_obj, opt_kwargs={}):
+    d, f, t = data_obj.dft
+
+    _line = Model(linear)
+
+    params = Parameters()
+    params['m'] = Parameter(name='m', value=np.median(f))
+    params['c'] = Parameter(name='c', value=0, min=-10 * np.median(f))
+
+    fitted = _line.fit(f, params, x=d)
+
+    return fitted, (d, f, fitted.best_fit)

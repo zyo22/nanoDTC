@@ -5,12 +5,15 @@ import numpy as np
 
 class DataObject():
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, bead_radius):
         self.file_path = file_path
 
         self._read_file()
         for k, v in self.meta_data.items():
             setattr(self, k, v)
+            
+        self.bead_radius = bead_radius
+        self.results = dict()
 
     def _read_file(self):
         with open(self.file_path, "r") as f:
